@@ -1,0 +1,4 @@
+[mariadb]
+log-bin
+server_id=1
+log-basename=master1

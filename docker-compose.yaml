@@ -1,0 +1,20 @@
+version: '3'
+services:
+  maria-master:
+    image: "mariadb:10.4"
+    environment:
+      MYSQL_ROOT_PASSWORD: master
+    ports:
+      - 3301:3306
+    volumes:
+      - ./docker/master-init/init-scripts:/docker-entrypoint-initdb.d
+      - ./docker/master-init/cnf:/etc/mysql/conf.d
+  maria-slave:
+    image: "mariadb:10.4"
+    environment:
+      MYSQL_ROOT_PASSWORD: slave
+    ports:
+      - 3302:3306
+    volumes:
+      - ./docker/slave-init/cnf:/etc/mysql/conf.d
+      - ./docker/slave-init/init-scripts:/docker-entrypoint-initdb.d
