@@ -11,10 +11,21 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+@Slf4j
 @SpringBootApplication
 public class ReadFromReplicatApplication {
 
     public static void main(String[] args) {
+        ConfigurableApplicationContext ctx = SpringApplication.run(ReadFromReplicatApplication.class, args);
+        final TaskRepository taskRepository = ctx.getBean(TaskRepository.class);
+
+        taskRepository.save(new Task("first", "Some task 1"));
+        log.info("all tasks: {}", taskRepository.findAll());
+        taskRepository.save(new Task("second", "Some task 2"));
+        log.info("all tasks: {}", taskRepository.findAll());
+    }
+
+    public static void complexMain(String [] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(ReadFromReplicatApplication.class, args);
         final TaskRepository taskRepository = ctx.getBean(TaskRepository.class);
         final ExecutorService executorService = Executors.newFixedThreadPool(7);

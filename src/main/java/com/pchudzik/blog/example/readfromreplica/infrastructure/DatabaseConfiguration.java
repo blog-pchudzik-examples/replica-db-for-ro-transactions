@@ -57,7 +57,7 @@ public class DatabaseConfiguration {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(routingDataSource())
-                .packages("com.pchudzik.blog.example.readfromreplicat.model")
+                .packages("com.pchudzik.blog.example.readfromreplica.model")
                 .build();
     }
 
