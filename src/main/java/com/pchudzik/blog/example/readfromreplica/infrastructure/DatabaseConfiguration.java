@@ -1,4 +1,4 @@
-package com.pchudzik.blog.example.readfromreplicat.infrastructure;
+package com.pchudzik.blog.example.readfromreplica.infrastructure;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;

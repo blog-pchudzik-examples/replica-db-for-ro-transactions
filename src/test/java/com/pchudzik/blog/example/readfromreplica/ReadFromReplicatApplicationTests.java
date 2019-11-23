@@ -1,4 +1,4 @@
-package com.pchudzik.blog.example.readfromreplicat;
+package com.pchudzik.blog.example.readfromreplica;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

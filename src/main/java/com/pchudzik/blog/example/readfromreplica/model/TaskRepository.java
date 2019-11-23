@@ -1,4 +1,4 @@
-package com.pchudzik.blog.example.readfromreplicat.model;
+package com.pchudzik.blog.example.readfromreplica.model;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

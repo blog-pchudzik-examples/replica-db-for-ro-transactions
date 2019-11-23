@@ -1,7 +1,7 @@
-package com.pchudzik.blog.example.readfromreplicat;
+package com.pchudzik.blog.example.readfromreplica;
 
-import com.pchudzik.blog.example.readfromreplicat.model.Task;
-import com.pchudzik.blog.example.readfromreplicat.model.TaskRepository;
+import com.pchudzik.blog.example.readfromreplica.model.Task;
+import com.pchudzik.blog.example.readfromreplica.model.TaskRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;

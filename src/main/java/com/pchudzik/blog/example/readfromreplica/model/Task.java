@@ -1,4 +1,4 @@
-package com.pchudzik.blog.example.readfromreplicat.model;
+package com.pchudzik.blog.example.readfromreplica.model;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;

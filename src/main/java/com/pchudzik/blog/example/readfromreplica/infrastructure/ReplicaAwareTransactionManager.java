@@ -1,4 +1,4 @@
-package com.pchudzik.blog.example.readfromreplicat.infrastructure;
+package com.pchudzik.blog.example.readfromreplica.infrastructure;
 
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
