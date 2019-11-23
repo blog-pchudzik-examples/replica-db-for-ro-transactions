@@ -2,8 +2,8 @@ package com.pchudzik.blog.example.readfromreplica;
 
 import com.pchudzik.blog.example.readfromreplica.model.Task;
 import com.pchudzik.blog.example.readfromreplica.model.TaskRepository;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -11,12 +11,12 @@ import org.springframework.context.ConfigurableApplicationContext;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Slf4j
 @SpringBootApplication
-public class ReadFromReplicatApplication {
+public class ReadFromReplicaApplication {
+    private static final Logger log = LoggerFactory.getLogger(ReadFromReplicaApplication.class);
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext ctx = SpringApplication.run(ReadFromReplicatApplication.class, args);
+        ConfigurableApplicationContext ctx = SpringApplication.run(ReadFromReplicaApplication.class, args);
         final TaskRepository taskRepository = ctx.getBean(TaskRepository.class);
 
         taskRepository.save(new Task("first", "Some task 1"));
@@ -25,8 +25,8 @@ public class ReadFromReplicatApplication {
         log.info("all tasks: {}", taskRepository.findAll());
     }
 
-    public static void complexMain(String [] args) {
-        ConfigurableApplicationContext ctx = SpringApplication.run(ReadFromReplicatApplication.class, args);
+    public static void complexMain(String[] args) {
+        ConfigurableApplicationContext ctx = SpringApplication.run(ReadFromReplicaApplication.class, args);
         final TaskRepository taskRepository = ctx.getBean(TaskRepository.class);
         final ExecutorService executorService = Executors.newFixedThreadPool(7);
         for (int i = 0; i < 100; i++) {
@@ -39,10 +39,14 @@ public class ReadFromReplicatApplication {
         new Reader(taskRepository).run();
     }
 
-    @RequiredArgsConstructor
     private static class Writer implements Runnable {
         private final TaskRepository taskRepository;
         private final int index;
+
+        private Writer(TaskRepository taskRepository, int index) {
+            this.taskRepository = taskRepository;
+            this.index = index;
+        }
 
         @Override
         public void run() {
@@ -50,10 +54,13 @@ public class ReadFromReplicatApplication {
         }
     }
 
-    @Slf4j
-    @RequiredArgsConstructor
     private static class Reader implements Runnable {
+        private static final Logger log = LoggerFactory.getLogger(Reader.class);
         private final TaskRepository taskRepository;
+
+        private Reader(TaskRepository taskRepository) {
+            this.taskRepository = taskRepository;
+        }
 
         @Override
         public void run() {
