@@ -2,6 +2,7 @@ package com.pchudzik.blog.example.readfromreplica;
 
 import com.pchudzik.blog.example.readfromreplica.model.Task;
 import com.pchudzik.blog.example.readfromreplica.model.TaskRepository;
+import com.pchudzik.blog.example.readfromreplica.model.TaskServiceOuter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -15,7 +16,13 @@ import java.util.concurrent.Executors;
 public class ReadFromReplicaApplication {
     private static final Logger log = LoggerFactory.getLogger(ReadFromReplicaApplication.class);
 
-    public static void main(String[] args) {
+    public static void main(String [] args) {
+        ConfigurableApplicationContext ctx = SpringApplication.run(ReadFromReplicaApplication.class, args);
+        TaskServiceOuter service = ctx.getBean(TaskServiceOuter.class);
+
+        log.info("save & findAll {}", service.findAllReadwrite());
+    }
+    public static void simpleMain(String[] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(ReadFromReplicaApplication.class, args);
         final TaskRepository taskRepository = ctx.getBean(TaskRepository.class);
 

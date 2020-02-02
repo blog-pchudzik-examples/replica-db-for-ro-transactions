@@ -22,6 +22,10 @@ class MasterReplicaRoutingDataSource extends AbstractRoutingDataSource {
         currentDataSource.set(isReadonly ? Type.REPLICA : Type.MASTER);
     }
 
+    static boolean isCurrentlyReadonly() {
+        return currentDataSource.get() == Type.REPLICA;
+    }
+
     @Override
     protected Object determineCurrentLookupKey() {
         return currentDataSource.get();
